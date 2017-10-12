@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul,li {
+            list-style: none;
+        }
+        .box {
+            width: 707px;
+            height: 444px;
+            background-size: cover;
+            margin: 100px auto;
+            position: relative;
+            border: 1px solid gold;
+        }
+        .content-box {
+            width: 476px;
+            height: 146px;
+            position: absolute;
+            top: 112px;
+            left: 80px;
+            overflow: hidden;
+            border: 1px solid blue;
+        }
+        .content {
+            width: 476px;
+            position: absolute;
+        }
+        .content li {
+            width: 476px;
+            height: 146px;
+            text-align: center;
+            line-height: 146px;
+            color: #cccccc;
+            font-size: 50px;
+        }
+        .btn {
+            width: 264px;
+            height: 68px;
+            position: absolute;
+            top: 357px;
+            left: 188px;
+            cursor: pointer;
+            border: 1px solid red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="content-box">
+            <ul class="content"></ul>
+        </div>
+        <div class="btn"></div>
+    </div>
+</body>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function(){
+            //核心思想是让最后添加的一个里项变成随机添加，然后显示最后一项随机添加的li，显示的办法是让ul向上移动
+            var arr=[];
+            function init(){
+                arr=['周一','吴二','张三','李四','王五','马六','田七','张八','李九','赵十','王十一','钱十二','李十三','孟十四'];
+                arr.push(arr[parseInt(Math.random()*(arr.length))]);//arr中随机一项添加到arr里的最后面
+                var str='';
+                //动态添加arr中的项到里中
+                for(var i=0;i<arr.length;i++){
+                    str+='<li>'+arr[i]+'</li>';
+                }
+                $('.content').html(str);
+                console.log(str);
+            }
+            init();
+            $('.btn').on('click',function(){
+                init();
+                $('.content').css({top:0}).animate({top:-146*(arr.length-1)},500);//每点击一次让ul向上移动到最后一个li的位置
+
+            })
+        })
+
+
+    </script>
+</html>
